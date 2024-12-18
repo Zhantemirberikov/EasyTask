@@ -13,4 +13,4 @@ User-Friendly Interface: Intuitive design for seamless navigation and task organ
 Customizable Tasks: Add descriptions, due dates, and priorities to organize your workflow.
 This application simplifies productivity and keeps you on top of your schedule, offering robust functionality for both personal and professional use.
 
-We drew inspiration from the Platonus platform while designing this application.
+We drew inspiration from the Platonus,Egov platforms while designing this application.
