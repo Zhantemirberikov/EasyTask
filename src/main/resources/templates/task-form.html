@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Форма задачи</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+<div class="container mt-5">
+    <h2 th:text="${task.id == null ? 'Добавить задачу' : 'Редактировать задачу'}"></h2>
+    <form th:action="@{/tasks/add}" th:object="${task}" method="post" enctype="multipart/form-data" class="mt-4">
+        <div class="mb-3">
+            <label for="title" class="form-label">Название</label>
+            <input type="text" id="title" th:field="*{title}" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="description" class="form-label">Описание</label>
+            <textarea id="description" th:field="*{description}" class="form-control"></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="dueDate" class="form-label">Дата выполнения</label>
+            <input type="date" id="dueDate" th:field="*{dueDate}" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="category" class="form-label">Категория</label>
+            <select id="category" th:field="*{category}" class="form-select">
+                <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="image" class="form-label">Загрузить изображение</label>
+            <input type="file" id="image" name="image" class="form-control">
+        </div>
+
+        <div class="mb-3" th:if="${task.imageUrl != null}">
+            <label class="form-label">Текущее изображение</label>
+            <div>
+                <img th:src="${task.imageUrl}" alt="Изображение задачи" style="max-width: 200px; max-height: 200px;">
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <button type="submit" class="btn btn-success">Сохранить</button>
+            <a href="/tasks" class="btn btn-secondary">Отмена</a>
+        </div>
+    </form>
+
+    <script>
+        const dateInput = document.getElementById('dueDate');
+        const today = new Date().toISOString().split('T')[0];
+        dateInput.setAttribute('min', today);
+    </script>
+</div>
+</body>
+</html>
